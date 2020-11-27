@@ -764,7 +764,7 @@ class BiliBiliBangumiIE(InfoExtractor):
             entry = {}
             entry.update(self._info)
             entry.update({
-                "title": "%s - %s %s" % (self._info['title'], episode_info['titleFormat'], episode_info['longTitle']),
+                "title": "%s %s" % (episode_info['titleFormat'], episode_info['longTitle']),
                 "id": video_id,
                 "episode": episode_info['longTitle'],
                 "episode_id": episode_info['id']

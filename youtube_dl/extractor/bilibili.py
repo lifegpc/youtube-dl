@@ -128,8 +128,8 @@ class BiliBiliIE(InfoExtractor):
             part = int(query['p'][0])
 
         # Set Cookies need to parse the Links.
-        self._set_cookie(domain=".bilibili.com", name="CURRENT_QUALITY", value="120")  # Set default video quality
-        self._set_cookie(domain=".bilibili.com", name="CURRENT_FNVAL", value="16")
+        self._set_cookie(domain=".bilibili.com", name="CURRENT_QUALITY", value="125")  # Set default video quality
+        self._set_cookie(domain=".bilibili.com", name="CURRENT_FNVAL", value="80")
         self._set_cookie(domain=".bilibili.com", name="laboratory", value="1-1")  # Use new webpage API
         self._set_cookie(domain=".bilibili.com", name="stardustvideo", value="1")
 
@@ -223,7 +223,7 @@ class BiliBiliIE(InfoExtractor):
                 else:
                     new_api = False
                     play_info = self._download_json(
-                        "https://api.bilibili.com/x/player/playurl?cid=%s&qn=120&otype=json&bvid=%s&fnver=0&fnval=16" % (part_info['cid'], bvid),
+                        "https://api.bilibili.com/x/player/playurl?cid=%s&qn=125&otype=json&bvid=%s&fnver=0&fnval=80" % (part_info['cid'], bvid),
                         "%s Part%s" % (video_id, part_info['page']),
                         "Geting video links.",
                         "Unable to get video links.")
@@ -232,7 +232,7 @@ class BiliBiliIE(InfoExtractor):
                     play_info = play_info['data']
             else:
                 play_info = self._download_json(
-                    "https://api.bilibili.com/x/player/playurl?cid=%s&qn=120&otype=json&bvid=%s&fnver=0&fnval=16" % (part_info['cid'], bvid),
+                    "https://api.bilibili.com/x/player/playurl?cid=%s&qn=125&otype=json&bvid=%s&fnver=0&fnval=80" % (part_info['cid'], bvid),
                     "%s Part%s" % (video_id, part_info['page']),
                     "Geting video links.",
                     "Unable to get video links.")
@@ -279,7 +279,7 @@ class BiliBiliIE(InfoExtractor):
                             else:
                                 new_api = False
                                 play_info = self._download_json(
-                                    "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=16" % (part_info['cid'], video_q, bvid),
+                                    "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=80" % (part_info['cid'], video_q, bvid),
                                     "%s Part%s" % (video_id, part_info['page']),
                                     "Geting video links for format id : %s." % (video_q),
                                     "Unable to get video links for format id : %s." % (video_q))
@@ -288,7 +288,7 @@ class BiliBiliIE(InfoExtractor):
                                 play_info = play_info['data']
                         else:
                             play_info = self._download_json(
-                                "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=16" % (part_info['cid'], video_q, bvid),
+                                "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=80" % (part_info['cid'], video_q, bvid),
                                 "%s Part%s" % (video_id, part_info['page']),
                                 "Geting video links for format id : %s." % (video_q),
                                 "Unable to get video links for format id : %s." % (video_q))
@@ -365,7 +365,7 @@ class BiliBiliIE(InfoExtractor):
                                 else:
                                     new_api = False
                                     play_info = self._download_json(
-                                        "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=16" % (part_info['cid'], video_q, bvid),
+                                        "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=80" % (part_info['cid'], video_q, bvid),
                                         "%s Part%s" % (video_id, part_info['page']),
                                         "Geting video links for format id : %s." % (video_q),
                                         "Unable to get video links for format id : %s." % (video_q))
@@ -374,7 +374,7 @@ class BiliBiliIE(InfoExtractor):
                                     play_info = play_info['data']
                             else:
                                 play_info = self._download_json(
-                                    "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=16" % (part_info['cid'], video_q, bvid),
+                                    "https://api.bilibili.com/x/player/playurl?cid=%s&qn=%s&otype=json&bvid=%s&fnver=0&fnval=80" % (part_info['cid'], video_q, bvid),
                                     "%s Part%s" % (video_id, part_info['page']),
                                     "Geting video links for format id : %s." % (video_q),
                                     "Unable to get video links for format id : %s." % (video_q))
@@ -556,7 +556,7 @@ class BiliBiliBangumiIE(InfoExtractor):
             else:
                 self._new_api = False
                 play_info = self._download_json(
-                    "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=120&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=16&session=" % (episode_info['cid'], episode_info['bvid'], epid),
+                    "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=125&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=80&session=" % (episode_info['cid'], episode_info['bvid'], epid),
                     video_id,
                     "Geting video links.",
                     "Unable to get video links.",
@@ -569,7 +569,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                 play_info = play_info['result']
         else:
             play_info = self._download_json(
-                "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=120&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=16&session=" % (episode_info['cid'], episode_info['bvid'], epid),
+                "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=125&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=80&session=" % (episode_info['cid'], episode_info['bvid'], epid),
                 video_id,
                 "Geting video links.",
                 "Unable to get video links.",
@@ -622,7 +622,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                         else:
                             self._new_api = False
                             play_info = self._download_json(
-                                "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=16&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
+                                "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=80&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
                                 video_id,
                                 "Geting video links for format id : %s." % (video_q),
                                 "Unable to get video links for format id : %s." % (video_q),
@@ -635,7 +635,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                             play_info = play_info['result']
                     else:
                         play_info = self._download_json(
-                            "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=16&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
+                            "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=80&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
                             video_id,
                             "Geting video links for format id : %s." % (video_q),
                             "Unable to get video links for format id : %s." % (video_q),
@@ -726,7 +726,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                             else:
                                 self._new_api = False
                                 play_info = self._download_json(
-                                    "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=16&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
+                                    "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=80&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
                                     video_id,
                                     "Geting video links for format id : %s." % (video_q),
                                     "Unable to get video links for format id : %s." % (video_q),
@@ -739,7 +739,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                                 play_info = play_info['result']
                         else:
                             play_info = self._download_json(
-                                "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=16&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
+                                "https://api.bilibili.com/pgc/player/web/playurl?cid=%s&qn=%s&type=&otype=json&fourk=1&bvid=%s&ep_id=%s&fnver=0&fnval=80&session=" % (episode_info['cid'], video_q, episode_info['bvid'], epid),
                                 video_id,
                                 "Geting video links for format id : %s." % (video_q),
                                 "Unable to get video links for format id : %s." % (video_q),
@@ -815,8 +815,8 @@ class BiliBiliBangumiIE(InfoExtractor):
             video_id = "ep" + video_id
 
         # Set Cookies need to parse the Links.
-        self._set_cookie(domain=".bilibili.com", name="CURRENT_QUALITY", value="120")  # Set default video quality
-        self._set_cookie(domain=".bilibili.com", name="CURRENT_FNVAL", value="16")
+        self._set_cookie(domain=".bilibili.com", name="CURRENT_QUALITY", value="125")  # Set default video quality
+        self._set_cookie(domain=".bilibili.com", name="CURRENT_FNVAL", value="80")
         self._set_cookie(domain=".bilibili.com", name="laboratory", value="1-1")  # Use new webpage API
         self._set_cookie(domain=".bilibili.com", name="stardustvideo", value="1")
 

@@ -591,7 +591,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                     "title": "%s - %s %s" % (self._info['title'], episode_info['titleFormat'], episode_info['longTitle']),
                     "id": video_id,
                     "episode": episode_info['longTitle'],
-                    "episode_id": episode_info['id']
+                    "episode_id": str(episode_info['id'])
                 })
             video_quality = play_info['quality']
             accept_video_quality_desc = play_info['accept_description']
@@ -658,7 +658,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                         "title": "%s - %s %s" % (self._info['title'], episode_info['titleFormat'], episode_info['longTitle']),
                         "id": video_id,
                         "episode": episode_info['longTitle'],
-                        "episode_id": episode_info['id']
+                        "episode_id": str(episode_info['id'])
                     })
                 else:
                     entry.update({
@@ -767,7 +767,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                 "title": "%s %s" % (episode_info['titleFormat'], episode_info['longTitle']),
                 "id": video_id,
                 "episode": episode_info['longTitle'],
-                "episode_id": episode_info['id']
+                "episode_id": str(episode_info['id'])
             })
             formats_output = []
             for i in video_quality_list:
@@ -848,7 +848,7 @@ class BiliBiliBangumiIE(InfoExtractor):
             "series": media_info['series'],
             "title": media_info['title'],
             "season": media_info['title'],
-            "season_id": media_info['ssId'],
+            "season_id": str(media_info['ssId']),
             "id": video_id,
             "thumbnail": "https:" + media_info['cover'],
             "description": media_info['evaluate'],

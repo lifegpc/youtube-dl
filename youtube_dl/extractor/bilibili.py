@@ -659,7 +659,8 @@ class BiliBiliBangumiIE(InfoExtractor):
                         "title": "%s - %s %s" % (self._info['title'], episode_info['titleFormat'], episode_info['longTitle']),
                         "id": video_id,
                         "episode": episode_info['longTitle'],
-                        "episode_id": str(episode_info['id'])
+                        "episode_id": str(episode_info['id']),
+                        "webpage_url": uri
                     })
                 else:
                     entry.update({

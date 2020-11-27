@@ -540,14 +540,14 @@ class BiliBiliBangumiIE(InfoExtractor):
             video_id = "%s %s" % (self._video_id, episode_info['titleFormat'])
         else:
             video_id = self._video_id
-        if self._first:
-            webpage = self._webpage
-            self._first = False
-        else:
-            webpage = self._download_webpage(uri, video_id)
         headers = {'referer': uri}
         self._new_api = False  # Disalbe by defalut now because it not works now
         if self._new_api:
+            if self._first:
+                webpage = self._webpage
+                self._first = False
+            else:
+                webpage = self._download_webpage(uri, video_id)
             play_info = re.search(r"window\.__playinfo__=([^<]+)", webpage, re.I)
             if play_info is not None:
                 play_info = json.loads(play_info.groups()[0])

@@ -546,6 +546,7 @@ class BiliBiliBangumiIE(InfoExtractor):
         else:
             webpage = self._download_webpage(uri, video_id)
         headers = {'referer': uri}
+        self._new_api = False  # Disalbe by defalut now because it not works now
         if self._new_api:
             play_info = re.search(r"window\.__playinfo__=([^<]+)", webpage, re.I)
             if play_info is not None:

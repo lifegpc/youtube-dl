@@ -419,7 +419,7 @@ class BiliBiliIE(InfoExtractor):
                     formats_output.append({
                         "url": audio_format["base_url"],
                         "format_id": str(audio_format['id']),
-                        "ext": "mp4",
+                        "ext": "m4a",
                         "acodec": audio_format['codecs'],
                         "http_headers": headers
                     })
@@ -793,7 +793,7 @@ class BiliBiliBangumiIE(InfoExtractor):
                 formats_output.append({
                     "url": audio_format["base_url"],
                     "format_id": str(audio_format['id']),
-                    "ext": "mp4",
+                    "ext": "m4a",
                     "acodec": audio_format['codecs'],
                     "http_headers": headers
                 })

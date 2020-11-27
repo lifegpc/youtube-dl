@@ -427,6 +427,7 @@ class BiliBiliIE(InfoExtractor):
                 if video_count > 1:
                     entry.update({"title": "%s - %s" % (info['title'], part_info['part'])})
                     entry.update({"id": "%s P%s" % (video_id, part_info['page'])})
+                    entry.update({"webpage_url": 'https://www.bilibili.com/video/av%s?p=%s' % (aid, part_info["page"])})
                 entries.append(entry)
 
         if video_count > 1:
@@ -592,7 +593,8 @@ class BiliBiliBangumiIE(InfoExtractor):
                     "title": "%s - %s %s" % (self._info['title'], episode_info['titleFormat'], episode_info['longTitle']),
                     "id": video_id,
                     "episode": episode_info['longTitle'],
-                    "episode_id": str(episode_info['id'])
+                    "episode_id": str(episode_info['id']),
+                    "webpage_url": uri
                 })
             video_quality = play_info['quality']
             accept_video_quality_desc = play_info['accept_description']
@@ -769,7 +771,8 @@ class BiliBiliBangumiIE(InfoExtractor):
                 "title": "%s %s" % (episode_info['titleFormat'], episode_info['longTitle']),
                 "id": video_id,
                 "episode": episode_info['longTitle'],
-                "episode_id": str(episode_info['id'])
+                "episode_id": str(episode_info['id']),
+                "webpage_url": uri
             })
             formats_output = []
             for i in video_quality_list:

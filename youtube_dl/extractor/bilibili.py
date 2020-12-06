@@ -494,7 +494,7 @@ class BiliBiliIE(InfoExtractor):
         return res
 
     def _int_to_srttime(self, i):
-        return "%02d:%02d.%02d" % (floor(i / 60), floor(i % 60), floor(i * 100 % 100))
+        return "%02d:%02d:%02d,%03d" % (floor(i / 3600), floor(i % 3600 / 60), floor(i % 60), floor(i * 1000 % 1000))
 
 
 class BiliBiliBangumiIE(InfoExtractor):

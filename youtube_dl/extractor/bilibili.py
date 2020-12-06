@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import re
 import json
+from math import floor
 
 from .common import InfoExtractor
 from ..compat import (
@@ -319,6 +320,7 @@ class BiliBiliIE(InfoExtractor):
                             })
                     entry['formats'] = formats_output
                     entries.append(entry)
+                info.update({'subtitles': self._extract_subtitles(aid, bvid, part_info['cid'])})
             elif 'dash' in play_info:  # Stream for dash player
                 video_quality = play_info['quality']
                 accept_video_quality_desc = play_info['accept_description']
@@ -424,6 +426,7 @@ class BiliBiliIE(InfoExtractor):
                         "http_headers": headers
                     })
                 entry.update({"formats": formats_output})
+                entry.update({"subtitles": self._extract_subtitles(aid, bvid, part_info['cid'])})
                 if video_count > 1:
                     entry.update({"title": "%s - %s" % (info['title'], part_info['part'])})
                     entry.update({"id": "%s P%s" % (video_id, part_info['page'])})
@@ -456,6 +459,42 @@ class BiliBiliIE(InfoExtractor):
                         "formats": entries[0]['formats']
                     })
                 return info
+
+    def _extract_subtitles(self, aid, bvid, cid):
+        cookie = self._get_cookies("https://api.bilibili.com/x/player.so")
+        buvid = ''
+        if 'buvid3' in cookie:
+            buvid = cookie['buvid3']
+        uri = "https://api.bilibili.com/x/player.so?id=cid:%s&aid=%s&bvid=%s&buvid=%s" % (cid, aid, bvid, buvid)
+        pl = self._download_webpage(uri, "%s" % (aid), "Get player.so.", "Unable player.so.")
+        rs = re.search(r'<subtitle>(.+)</subtitle>', pl)
+        if rs is None:
+            return {}
+        try:
+            obj = json.loads(rs.groups()[0])
+        except Exception:
+            return {}
+        if 'subtitles' not in obj:
+            return {}
+        subs = []
+        res = {}
+        for e in obj['subtitles']:
+            subs.append({"lan": e['lan'], 'land': e['lan_doc'], 'url': "https:%s" % (e['subtitle_url'])})
+        for e in subs:
+            sub = self._download_json(e['url'], "%s" % (aid), "Download Subtitle for %s" % (e['land']), "Unable Download Subtitle")
+            if 'body' in sub:
+                t = ""
+                i = 1
+                for s in sub['body']:
+                    t = t + "%d\n" % (i)
+                    t = t + "%s --> %s\n" % (self._int_to_srttime(s['from']), self._int_to_srttime(s['to']))
+                    t = t + "%s\n\n" % (s['content'])
+                    i = i + 1
+                res[e['lan']] = [{'ext': 'srt', 'data': t}]
+        return res
+
+    def _int_to_srttime(self, i):
+        return "%02d:%02d.%02d" % (floor(i / 60), floor(i % 60), floor(i * 100 % 100))
 
 
 class BiliBiliBangumiIE(InfoExtractor):
